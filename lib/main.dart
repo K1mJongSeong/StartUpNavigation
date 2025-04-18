@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:startup_navigation/mbti/mbti_question.dart';
 import 'package:http/http.dart' as http;
+
+import 'features/mbti/presentation/pages/mbti_question_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage> {
       if (syncResponse.statusCode == 200 || syncResponse.statusCode == 201) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MbtiQuestion()),
+          MaterialPageRoute(builder: (context) => const MbtiQuestionPage()),
         );
       } else {
         _showDialog(context, '내부 사용자 등록 실패');

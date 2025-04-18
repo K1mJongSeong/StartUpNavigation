@@ -27,10 +27,10 @@ class WelcomeScreens extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(
+            child: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Row(
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("🚀 ",
@@ -49,9 +49,16 @@ class WelcomeScreens extends StatelessWidget {
                     children: [
                       TextSpan(text: "당신만의 창업 스타일을 진단하고, "),
                       TextSpan(text: "딱 맞는 콘텐츠",
-                      style: TextStyle(color: Colors.pink))
-                    ]
-                  )
+                      style: TextStyle(color: Colors.pink),
+                      ),
+                      TextSpan(text: "를 만나보세요!"),
+                    ],
+                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.black54,),
+                ),
+                const SizedBox(height: 24,),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
                 )
               ],
             ),
