@@ -1,8 +1,7 @@
 class EndPoints {
-  static String emulatorApi = 'http://10.0.2.2:8000';
+  static const String baseUrl = 'http://192.168.0.70:3030/api';
 
-  static String localApi = 'http://127.0.0.1:8000';
-
-  static String biznaviApi = 'https://api.biznavi.co.kr/api';
-  static String login = "$biznaviApi/v1/member/m_access";
+  //로그인
+  static const String login = '$baseUrl/auth/login';
+  //MBTI
 }
