@@ -1,6 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:startup_navigation/features/auth/data/repositories/auth_repository.dart';
+import 'package:startup_navigation/features/mbti/bloc/mbti_question_event.dart';
+import 'package:startup_navigation/features/mbti/data/datasources/mbti_remote_data_source.dart';
+import 'package:startup_navigation/features/mbti/data/repositories/mbti_repository_impl.dart';
+import 'package:startup_navigation/features/mbti/domain/usecases/fetch_questions_usecase.dart';
+import 'package:startup_navigation/features/mbti/presentation/pages/mbti_question_page.dart';
 
+import '../../../mbti/bloc/mbti_question_bloc.dart';
 import '../../../welcome/presentation/pages/welcome_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,7 +40,17 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if(success) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const WelcomePage()
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
+        final dio = Dio();
+        final dataSource = MbtiRemoteDataSource(dio);
+        final repository = MbtiRepositoryImpl(dataSource);
+        final usecase = FetchMbtiQuestionsUseCase(repository);
+
+        return BlocProvider(create: (_) => MbtiQuestionBloc(usecase)..add(LoadMbtiQuestions(1)),
+        child: const MbtiQuestionPage(),
+        );
+      }
+        //const MbtiQuestionPage()
       ));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
